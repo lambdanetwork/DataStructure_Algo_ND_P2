@@ -23,8 +23,17 @@ def findSuffixTrieNode(node):
     return answer
 
 
-def insertTrieNode(node, char):
-    node[char] = initTrieNode()
+def insertTrieNode(node, word):
+    if len(word) == 0:
+        node['word_end'] = True
+        return
+
+    char = word[0]
+    tail = word[1:]
+    if not char in node:
+        node[char] = initTrieNode()
+
+    insertTrieNode(node[char], tail)
 
 
 class Trie:
@@ -34,22 +43,7 @@ class Trie:
 
     def insert(self, word):
         # Add a word to the Trie
-
-        def recursiveAdd(node, word):
-            if len(word) == 0:
-                node['word_end'] = True
-                return
-
-            char = word[0]
-            tail = word[1:]
-            if not char in node:
-                insertTrieNode(node, char)
-                recursiveAdd(node[char], tail)
-            else:
-                next_node = node[char]
-                recursiveAdd(next_node, tail)
-
-        recursiveAdd(self.root, word)
+        insertTrieNode(self.root, word)
 
     def find(self, prefix):
         def recursiveGetNode(node, word):
