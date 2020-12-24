@@ -10,11 +10,11 @@ def findSuffixTrieNode(node):
     answer = []
 
     def recursiveTraverse(node, word):
-        if node['word_end']:
+        if node['word_end']:  # our search has ended, process the word constructed so far
             answer.append(word)
 
         for k, next_node in node.items():
-            if(k == 'word_end'):
+            if(k == 'word_end'):  # ignore word_end, to be added as next_word
                 continue
             next_word = word + k
             recursiveTraverse(next_node, next_word)
@@ -24,13 +24,14 @@ def findSuffixTrieNode(node):
 
 
 def insertTrieNode(node, word):
-    if len(word) == 0:
+    if len(word) == 0:  # word has added, mark the last char as word_end = True
         node['word_end'] = True
         return
 
     char = word[0]
     tail = word[1:]
     if not char in node:
+        # add char to currentNode, if char and Node is exists, continue traversing
         node[char] = initTrieNode()
 
     insertTrieNode(node[char], tail)
