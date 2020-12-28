@@ -46,14 +46,18 @@ def rearrange_digits(input_list):
     Returns:
        (int),(int): Two maximum sums
     """
+    if(len(input_list) <= 0):
+        raise Exception("Please provide non-empty array")
+    
     sorted_list = merge_sort(input_list)
     answer = ['', '']
     for index, num in enumerate(sorted_list, start=0):
+        if(type(num) != int):
+            raise Exception("Each member of array has to be number")
         if index % 2 == 0:  # even index
             answer[0] += str(num)
         else:  # odd index
             answer[1] += str(num)
-
     answer[0] = int(answer[0])
     answer[1] = int(answer[1])
     return answer
@@ -68,5 +72,23 @@ def test_function(test_case):
         print("Fail")
 
 
-test_function([[1, 2, 3, 4, 5], [542, 31]])
 test_case = [[4, 6, 2, 5, 9, 8], [964, 852]]
+test_function(test_case)
+test_case = [[1, 2, 3, 4, 5], [542, 31]]
+test_function(test_case)
+
+# cannot accept empty array
+try:
+    test_case = [[],[]]
+    test_function(test_case)
+except Exception as e:
+    print("pass if Execption is raised", e)
+
+
+# test, make sure that array is only number
+try:
+    test_case = [['a','b','c'],[]]
+    test_function(test_case)
+except Exception as e:
+    print("pass if Execption is raised", e)
+
