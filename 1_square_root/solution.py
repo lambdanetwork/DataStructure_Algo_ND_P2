@@ -17,6 +17,8 @@ def sqrt(number):
     """
     if number == 0 or number == 1:
         return number
+    elif number < 0:
+        raise Exception("Square root of number less than 0 is not possible")
     low_bound = 0
     high_bound = number
 
@@ -46,3 +48,7 @@ print("Pass" if (int(math.sqrt(27)) == sqrt(27)) else "Fail")
 print("Pass" if (int(math.sqrt(200)) == sqrt(200)) else "Fail")
 print("Pass" if (int(math.sqrt(100000000)) == sqrt(100000000)) else "Fail")
 print("Pass" if (int(math.sqrt(9999999)) == sqrt(9999999)) else "Fail")
+try:
+    sqrt(-100)
+except:
+    print("Pass if exception is raised")

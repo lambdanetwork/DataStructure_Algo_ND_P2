@@ -46,7 +46,7 @@ def test_function(test_case):
     else:
         print("Fail")
 
-
+test_function([])
 test_function([2, 0, 1])
 test_function([0, 1, 2])
 test_function([0, 0, 2, 2, 2, 1, 1, 1, 2, 0, 2])
